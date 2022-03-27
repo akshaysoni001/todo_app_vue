@@ -1,19 +1,20 @@
-import axios from 'axios'
+import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: 'https://localhost:8888',
+  baseURL: "http://localhost:8888",
   withCredentials: false,
   headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
-  }
-})
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+});
 
 export default {
   getProjects() {
-    return apiClient.get('/todoapp')
+    return apiClient.get("/todoapp");
   },
-  postProject(){
-    return apiClient.post('/todoapp')
-  }
-}
+  postProject(payload) {
+    console.log("Pay", payload);
+    return apiClient.post("/todoapp", payload);
+  },
+};

@@ -1,13 +1,6 @@
 <template>
-
   <nav>
-    <v-snackbar
-      v-model="snackbar"
-      :timeout="1800"
-      top
-      text
-      color="primary"
-    >
+    <v-snackbar v-model="snackbar" :timeout="1800" top text color="primary">
       <span><strong> Awesome! </strong> {{ message }}</span>
       <template v-slot:action="{ on }">
         <v-btn color="blue" text v-bind="on" @click="snackbar = false">
@@ -87,11 +80,12 @@
 
 <script>
 import Popup from "@/components/PopUp";
+import EventService from "@/services/EventService";
 export default {
   components: { Popup },
   data() {
     return {
-      message: '',
+      message: "",
       drawer: false,
       links: [
         { icon: "dashboard", text: "Dashboard", route: "/" },
@@ -102,16 +96,17 @@ export default {
     };
   },
   methods: {
-    addProject() {
-    EventService.postProject()
-      .then(response => {
-        this.message = response.data
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }
-      this.snackbar=true
+    addProject(payload) {
+      EventService.postProject(payload)
+        .then((response) => {
+          console.log(response);
+          this.message = response.data;
+          this.$emit("getProject");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      this.snackbar = true;
     },
   },
 };

@@ -2,9 +2,7 @@
   <v-row justify="center">
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="success" dark v-bind="attrs" v-on="on">
-          Add Project
-        </v-btn>
+        <v-icon v-bind="attrs" v-on="on" color="green">update</v-icon>
       </template>
 
       <v-card>
@@ -51,16 +49,19 @@
               ></v-date-picker>
             </v-menu>
 
-            <v-btn
-              text
-              class="success mx-0 mt-3"
-              @click="submit"
-              :loading="false"
+            <v-btn text class="success mx-0 mt-3" @click="submit"
               >Add Project</v-btn
             >
           </v-form>
         </v-card-text>
       </v-card>
+    </v-dialog>
+
+    <v-dialog v-model="dialog1" v-on="on" persistent max-width="600px">
+      <template v-slot:activator="{ on, attrs }">
+        <v-icon v-bind="attrs" v-on="on" color="red">delete</v-icon>
+      </template>
+      <v-card>Delete Project</v-card>
     </v-dialog>
   </v-row>
 </template>
